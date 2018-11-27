@@ -1,6 +1,3 @@
 [submodule "third-party/Catch"]
   path = third-party/Catch
   url=https://github.com/philsquared/Catch.git
-[submodule "third-party/spdlog"]
-  path = third-party/spdlog
-  url = https://github.com/gabime/spdlog.git
