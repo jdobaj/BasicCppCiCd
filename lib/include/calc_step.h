@@ -12,7 +12,7 @@
 #include <functional>
 #include <string>
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 using Operation = std::function<int(const int &, const int &)>;
 
@@ -46,6 +46,6 @@ class CalcStep {
   bool has_value_{false};
   bool has_operation_{false};
 };
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd
 
 #endif  // CALC_STEP_HPP

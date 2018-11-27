@@ -4,9 +4,10 @@
 #include "calc.h"
 #include <catch.hpp>
 #include <iostream>
+#include <sstream>
 #include <memory>
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 namespace Test {
 
@@ -105,4 +106,4 @@ TEST_CASE("adding steps will work", "[calc]") {
 
 }  // namespace Test
 
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd

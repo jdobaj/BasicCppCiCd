@@ -5,7 +5,7 @@
 #include "logger.h"
 
 int main(int argc, char *argv[]) {
-  using namespace ModernCppCI;
+  using namespace BasicCppCiCd;
   Logger::level(LogLevel::info);
 
   Logger log{__func__};

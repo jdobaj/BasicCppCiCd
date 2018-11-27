@@ -4,7 +4,7 @@
 #include "logger.h"
 #include <catch.hpp>
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 namespace Test {
 
@@ -102,4 +102,4 @@ TEST_CASE("logger work as expected", "[logger]") {
 
 }  // namespace Test
 
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd

@@ -4,7 +4,7 @@
 #include "calc.h"
 #include <typeinfo>
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 Calc &Calc::operator=(const Calc &other) noexcept {
   operations_ = {other.operations_};
@@ -78,4 +78,4 @@ std::ostream &operator<<(std::ostream &stream, const Calc &calc) {
 
 Logger Calc::logger_{typeid(Calc).name()};
 
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd

@@ -15,7 +15,7 @@
 #include "calc_step.h"
 #include "logger.h"
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 template <class Type>
 using Dictionary = std::map<std::string, Type>;
@@ -75,6 +75,6 @@ class Calc {
   static Logger logger_;
 };
 
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd
 
 #endif  // CALC_HPP

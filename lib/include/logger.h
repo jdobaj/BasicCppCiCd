@@ -13,7 +13,7 @@
 #include <spdlog/spdlog.h>
 #include <string>
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 enum class LogLevel {
   info = spdlog::level::level_enum::info,
@@ -86,6 +86,6 @@ class Logger {
   std::shared_ptr<spdlog::logger> internal_logger_{nullptr};
 };
 
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd
 
 #endif  // LOG_HPP

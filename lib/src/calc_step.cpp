@@ -4,7 +4,7 @@
 #include "calc_step.h"
 #include <sstream>
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 std::ostream &operator<<(std::ostream &stream, const CalcStep &step) {
   if (step.has_value()) {
@@ -16,4 +16,4 @@ std::ostream &operator<<(std::ostream &stream, const CalcStep &step) {
   return stream;
 }
 
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd

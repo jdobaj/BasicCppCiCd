@@ -6,7 +6,7 @@
 #include "logger.h"
 
 int main(int argc, char* argv[]) {
-  using namespace ModernCppCI;
+  using namespace BasicCppCiCd;
   Logger::level(LogLevel::debug);
 
   auto result = Catch::Session().run(argc, argv);

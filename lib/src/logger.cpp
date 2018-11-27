@@ -14,7 +14,7 @@
 #include <spdlog/sinks/msvc_sink.h>
 #endif  // _DEBUG && _MSC_VER
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 auto create_spdlog() {
 #ifdef _WIN32
@@ -31,7 +31,8 @@ auto create_spdlog() {
   dist_sink->add_sink(debug_sink);
 #endif  // _DEBUG && _MSC_VER
 
-  return spdlog::details::registry::instance().create("console", dist_sink);
+  spdlog::details::registry::instance().register_logger(std::make_shared<spdlog::logger>("console", dist_sink));
+  return spdlog::details::registry::instance().get("console");
 }
 
 Logger::Logger(const std::string &section) : section_{section} {
@@ -42,4 +43,4 @@ Logger::Logger(const std::string &section) : section_{section} {
   }
 }
 
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd

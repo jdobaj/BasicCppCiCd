@@ -6,7 +6,7 @@
 #include <memory>
 #include "calc.h"
 
-namespace ModernCppCI {
+namespace BasicCppCiCd {
 
 namespace Test {
 
@@ -32,4 +32,4 @@ TEST_CASE("creating CalcStep with an operation shouldn't have a value",
 
 }  // namespace Test
 
-}  // namespace ModernCppCI
+}  // namespace BasicCppCiCd

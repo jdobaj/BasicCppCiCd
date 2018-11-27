@@ -15,7 +15,7 @@
 | [/app](/app) | application |
 | [/app/src](/app/src) | application sources  |
 | [/app/test](/app/test) | application test |
-| [/third_party](/third_party) | third party software        |
+| [/third-party](/third-party) | third party software        |
 
 ## Generate project
 
