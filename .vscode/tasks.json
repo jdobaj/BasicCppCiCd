@@ -1,0 +1,96 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "windows": {
+    "options": {
+      "shell": {
+        "executable": "cmd.exe",
+        "args": [
+          "/d",
+          "/c"
+        ]
+      },
+      "env": {
+        "BuildFolder": "${workspaceFolder}/build/windows/",
+        "X64Dir": "x64",
+        "X32Dir": "x32",
+        "DebugDir": "debug",
+        "ReleaseDir": "release",
+        "OutDir": "bin"
+      }
+    },
+  },
+  "linux": {
+    "options": {
+      "shell": {
+        "executable": "sh",
+        "args": [
+          "-c"
+        ]
+      },
+      "env": {
+        "BuildFolder": "${workspaceFolder}/build/linux/",
+        "X64Dir": "x64",
+        "X32Dir": "x32",
+        "DebugDir": "debug",
+        "ReleaseDir": "release",
+        "OutDir": "bin"
+      }
+    },
+  },
+  "tasks": [
+    {
+      "label": "configure-debug-x64",
+      "type": "shell",
+      "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B${BuildFolder}/${X64Dir}/${DebugDir}",
+      "windows": {
+        "command": "cmake -G \"Visual Studio 15 2017\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B%BuildFolder%/%X64Dir%/%DebugDir%",
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "build-debug-x64",
+      "type": "shell",
+      "command": "cmake --build ${BuildFolder}/${X64Dir}/${DebugDir}",
+      "windows": {
+        "command": "cmake --build %BuildFolder%/%X64Dir%/%DebugDir%",
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "configure-relWithDebugInfo-x64",
+      "type": "shell",
+      "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B${BuildFolder}/${X64Dir}/${ReleaseDir}",
+      "windows": {
+        "command": "cmake -G \"Visual Studio 15 2017\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B%BuildFolder%/%X64Dir%/%ReleaseDir%",
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "build-relWithDebugInfo-x64",
+      "type": "shell",
+      "command": "cmake --build ${BuildFolder}/${X64Dir}/${ReleaseDir}",
+      "windows": {
+        "command": "cmake --build %BuildFolder%/%X64Dir%/%ReleaseDir%",
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+  ],
+}

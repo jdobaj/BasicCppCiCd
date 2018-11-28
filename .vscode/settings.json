@@ -1,0 +1,43 @@
+{
+    // File Settings
+    "files.autoSave": "onFocusChange",
+    "files.exclude": {
+        "**/.git": true,
+    },
+    "search.exclude": {
+        "**/.git": true,
+    },
+    // Editor Settings
+    "editor.lineNumbers": "on",
+    "editor.fontSize": 14,
+    "editor.fontFamily": "Consolas, 'Courier New', monospace",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true, // overrides editor.insertSpaces
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 80,
+    "editor.wrappingIndent": "indent", // "same",
+    "editor.minimap.maxColumn": 100,
+    "editor.minimap.enabled": true,
+    "editor.minimap.renderCharacters": true,
+    "editor.minimap.showSlider": "mouseover",
+    "editor.minimap.side": "right",
+    "editor.mouseWheelScrollSensitivity": 1,
+    "editor.codeLens": true,
+    "editor.autoClosingBrackets": true,
+    "editor.matchBrackets": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.trimAutoWhitespace": true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+    },
+    "C_Cpp.clang_format_fallbackStyle": "Visual Studio",
+    "C_Cpp.clang_format_path": "clang-format",
+    // Diff Editor
+    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.renderIndicators": true,
+    "diffEditor.renderSideBySide": true,
+}

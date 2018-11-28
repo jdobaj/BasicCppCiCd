@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 3.3)
 
+# TODO https://github.com/pablospe/cmake-example-library
+
 project (BasicCppCiCd)
 
 set_property (GLOBAL PROPERTY USE_FOLDERS ON)
