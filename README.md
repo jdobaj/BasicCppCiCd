@@ -17,7 +17,7 @@
 | [/app/test](/app/test) | application test |
 | [/third-party](/third-party) | third party software        |
 
-## Generate project
+## generate project
 
 ```shell
   cmake -H. -BBuild
@@ -60,7 +60,7 @@ Generate different project types
   cmake -H. -BBuild -G "Visual Studio 15 2017"
 ```
 
-## Build
+## build
 
 From the Build folder
 
@@ -80,6 +80,23 @@ From the Build folder
   # run all test in Release build type
   ctest -V -C Release
 ```
+
+## todo
+
+- Setup docker build scripts
+- Setup docker-compose
+- Make docker-compose production ready (multi stage build, volumes, )
+- Setup VSC to invoke docker build scripts
+- Create CMake install and invoke that inside docker
+- Create CMake test etc.: everything that is required for a development and production ready environment
+- Cleanup docker build and apply best practice
+- Create a configuration file
+- Setup generic build script using python
+- Setup CI for Linux
+- Setup CI for Windows
+- Setup CI with docker on Linux and Windows
+- Setup CD using docker
+- Setup Kubernetes
 
 ## references
 

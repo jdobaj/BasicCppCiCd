@@ -1,0 +1,1 @@
+docker start qt-creator --attach --interactive

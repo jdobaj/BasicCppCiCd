@@ -1,0 +1,43 @@
+# Introduction https://docs.docker.com/compose/overview/#common-use-cases
+# todo Use in production https://docs.docker.com/compose/production/
+# todo Multi stage build https://docs.docker.com/develop/develop-images/multistage-build/
+version: '3'
+services:
+
+  windows-qt-dev-sh:
+    container_name: windows-qt-dev-sh
+    image: jdobaj/qt-dev:qtcreator
+    volumes:
+    - ./../../:/home/developer/BasicCppCiCd
+    - ./../../../docker-persistent-storage-as-bind-mount:/home/developer/docker-persistent-storage-as-bind-mount
+    env_file:
+    - windows-dev.env
+
+  windows-qt-dev-creator:
+    container_name: windows-qt-dev-creator
+    image: jdobaj/qt-dev:qtcreator
+    command: qtcreator
+    volumes:
+    - ./../../:/home/developer/BasicCppCiCd
+    - ./../../../docker-persistent-storage-as-bind-mount:/home/developer/docker-persistent-storage-as-bind-mount
+    env_file:
+    - windows-dev.env
+
+  qt-dev-sh:
+    container_name: qt-dev-sh
+    image: jdobaj/qt-dev:qtcreator
+    volumes:
+    - ./../../:/home/developer/BasicCppCiCd
+    - ./../../../docker-persistent-storage-as-bind-mount:/home/developer/docker-persistent-storage-as-bind-mount
+    env_file:
+    - linux-dev.env
+
+  qt-dev-creator:
+    container_name: qt-dev-creator
+    image: jdobaj/qt-dev:qtcreator
+    command: qtcreator
+    volumes:
+    - ./../../:/home/developer/BasicCppCiCd
+    - ./../../../docker-persistent-storage-as-bind-mount:/home/developer/docker-persistent-storage-as-bind-mount
+    env_file:
+    - linux-dev.env

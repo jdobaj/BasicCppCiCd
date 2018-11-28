@@ -12,6 +12,7 @@
         ]
       },
       "env": {
+        "CMakeGenerator": "Visual Studio 15 2017",
         "BuildFolder": "${workspaceFolder}/build/windows/",
         "X64Dir": "x64",
         "X32Dir": "x32",
@@ -38,6 +39,7 @@
         ]
       },
       "env": {
+        "CMakeGenerator": "Unix Makefiles",
         "BuildFolder": "${workspaceFolder}/build/linux/",
         "X64Dir": "x64",
         "X32Dir": "x32",
@@ -59,9 +61,9 @@
     {
       "label": "configure-debug-x64",
       "type": "shell",
-      "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B${BuildFolder}/${X64Dir}/${DebugDir}",
+      "command": "cmake -G \"${CMakeGenerator}\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B${BuildFolder}/${X64Dir}/${DebugDir}",
       "windows": {
-        "command": "cmake -G \"Visual Studio 15 2017\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B%BuildFolder%/%X64Dir%/%DebugDir%"
+        "command": "cmake -G \"${CMakeGenerator}\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B%BuildFolder%/%X64Dir%/%DebugDir%"
       },
       "group": "build"
     },
@@ -77,9 +79,9 @@
     {
       "label": "configure-relWithDebugInfo-x64",
       "type": "shell",
-      "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B${BuildFolder}/${X64Dir}/${ReleaseDir}",
+      "command": "cmake -G \"${CMakeGenerator}\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B${BuildFolder}/${X64Dir}/${ReleaseDir}",
       "windows": {
-        "command": "cmake -G \"Visual Studio 15 2017\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B%BuildFolder%/%X64Dir%/%ReleaseDir%"
+        "command": "cmake -G \"${CMakeGenerator}\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B%BuildFolder%/%X64Dir%/%ReleaseDir%"
       },
       "group": "build"
     },
@@ -91,6 +93,43 @@
         "command": "cmake --build %BuildFolder%/%X64Dir%/%ReleaseDir%",
       },
       "group": "build",
-    }
+    },
+    {
+      "label": "docker-init-container",
+      "type": "shell",
+      "options": {
+        "shell": {
+          "executable": "/usr/bin/pwsh",
+          "args": [
+            "-NoProfile",
+            "-Command"
+          ]
+        }
+      },
+      "command": "cmake -G \"${CMakeGenerator}\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B${BuildFolder}/${X64Dir}/${ReleaseDir}",
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "powershell.exe",
+            "args": [
+              "-NoProfile",
+              "-ExecutionPolicy",
+              "Bypass",
+              "-Command"
+            ]
+          },
+          "env": {
+            "BuildFolder": "${workspaceFolder}/build/windows/",
+            "X64Dir": "x64",
+            "X32Dir": "x32",
+            "DebugDir": "debug",
+            "ReleaseDir": "release",
+            "OutDir": "bin"
+          }
+        },
+        "command": "cmake -G \"${CMakeGenerator}\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B%BuildFolder%/%X64Dir%/%ReleaseDir%"
+      },
+      "group": "build"
+    },
   ],
 }
