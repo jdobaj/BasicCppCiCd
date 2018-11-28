@@ -20,6 +20,14 @@
         "OutDir": "bin"
       }
     },
+    "presentation": {
+      "reveal": "always",
+      "panel": "new",
+      "focus": true
+    },
+    "problemMatcher": [
+      "$msCompile"
+    ]
   },
   "linux": {
     "options": {
@@ -38,6 +46,14 @@
         "OutDir": "bin"
       }
     },
+    "presentation": {
+      "reveal": "always",
+      "panel": "new",
+      "focus": true
+    },
+    "problemMatcher": [
+      "$gcc"
+    ]
   },
   "tasks": [
     {
@@ -45,39 +61,27 @@
       "type": "shell",
       "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B${BuildFolder}/${X64Dir}/${DebugDir}",
       "windows": {
-        "command": "cmake -G \"Visual Studio 15 2017\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B%BuildFolder%/%X64Dir%/%DebugDir%",
+        "command": "cmake -G \"Visual Studio 15 2017\" -DCMAKE_BUILD_TYPE=Debug -H. -Ax64 -B%BuildFolder%/%X64Dir%/%DebugDir%"
       },
-      "group": "build",
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      }
+      "group": "build"
     },
     {
       "label": "build-debug-x64",
       "type": "shell",
       "command": "cmake --build ${BuildFolder}/${X64Dir}/${DebugDir}",
       "windows": {
-        "command": "cmake --build %BuildFolder%/%X64Dir%/%DebugDir%",
+        "command": "cmake --build %BuildFolder%/%X64Dir%/%DebugDir%"
       },
-      "group": "build",
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      }
+      "group": "build"
     },
     {
       "label": "configure-relWithDebugInfo-x64",
       "type": "shell",
       "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B${BuildFolder}/${X64Dir}/${ReleaseDir}",
       "windows": {
-        "command": "cmake -G \"Visual Studio 15 2017\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B%BuildFolder%/%X64Dir%/%ReleaseDir%",
+        "command": "cmake -G \"Visual Studio 15 2017\" -DCMAKE_BUILD_TYPE=RelWithDebugInfo -H. -Ax64 -B%BuildFolder%/%X64Dir%/%ReleaseDir%"
       },
-      "group": "build",
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      }
+      "group": "build"
     },
     {
       "label": "build-relWithDebugInfo-x64",
@@ -87,10 +91,6 @@
         "command": "cmake --build %BuildFolder%/%X64Dir%/%ReleaseDir%",
       },
       "group": "build",
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      }
-    },
+    }
   ],
 }
