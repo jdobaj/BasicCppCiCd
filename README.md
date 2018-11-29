@@ -95,6 +95,7 @@ From the Build folder
 - Setup docker build and docker-compose
 - Build inside docker
 - Implement a generic build-, configure-, test-, run-, install-script (see for example x11vnc-desktop)
+  - also automatically generate the file with the environment variables
 - Make docker-compose production ready (multi stage build, volumes, ) (see https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds)
   - create at least a develop, debug, test, deploy stage
 - Setup VSC to invoke docker build scripts
