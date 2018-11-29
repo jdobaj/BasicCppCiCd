@@ -1,10 +1,18 @@
 # Basic C++ CI/CD Example
 
-## libraries used
+## Libraries used
+
 - [spdlog](https://github.com/gabime/spdlog) for a moderm log system. (as submodule)
 - [catch](https://github.com/philsquared/Catch) as the test framework.  (as submodule)
 
-##  project structure
+### Libraries planed to be used
+
+- boost
+- qt
+- CppMicroservices
+- OpenDDS
+
+## Project structure
 
 | folder       | Content              |
 | ------------ | -------------------- |
@@ -17,7 +25,7 @@
 | [/app/test](/app/test) | application test |
 | [/third-party](/third-party) | third party software        |
 
-## generate project
+## Generate project
 
 ```shell
   cmake -H. -BBuild
@@ -60,7 +68,7 @@ Generate different project types
   cmake -H. -BBuild -G "Visual Studio 15 2017"
 ```
 
-## build
+## Build
 
 From the Build folder
 
@@ -70,6 +78,7 @@ From the Build folder
   # build a specific build type
   cmake --build . --config Release
 ```
+
 ## Run tests
 
 From the Build folder
@@ -83,11 +92,17 @@ From the Build folder
 
 ## todo
 
-- Setup docker build scripts
-- Setup docker-compose
-- Make docker-compose production ready (multi stage build, volumes, )
+- Setup docker build and docker-compose
+- Build inside docker
+- Implement a generic build-, configure-, test-, run-, install-script (see for example x11vnc-desktop)
+- Make docker-compose production ready (multi stage build, volumes, ) (see https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds)
+  - create at least a develop, debug, test, deploy stage
 - Setup VSC to invoke docker build scripts
 - Create CMake install and invoke that inside docker
+- Create different/multi-stages images for deployment, development, testing,...
+- Use small base images e.g. the Alpine image by using the from instruction (https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#dockerfile-instructions)
+- Use labels
+- Create .dockerignore file
 - Create CMake test etc.: everything that is required for a development and production ready environment
 - Cleanup docker build and apply best practice
 - Create a configuration file
@@ -97,6 +112,9 @@ From the Build folder
 - Setup CI with docker on Linux and Windows
 - Setup CD using docker
 - Setup Kubernetes
+- Adjust documentation
+- Implement tests including integration tests (python?)
+- Implement examples
 
 ## references
 
