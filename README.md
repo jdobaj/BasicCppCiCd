@@ -112,6 +112,8 @@ From the Build folder
 - Setup CI for Windows
 - Setup CI with docker on Linux and Windows
 - Setup CD using docker
+- Setup minimal microservice example
+- Test google's istio framework
 - Setup Kubernetes
 - Adjust documentation
 - Implement tests including integration tests (python?)
