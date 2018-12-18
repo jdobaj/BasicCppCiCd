@@ -1,11 +1,34 @@
 FROM debian:latest as build-env
+
+ENV USER_NAME developer
+ENV HOME_DIR /home/${USER_NAME}
 RUN apt-get update && apt-get -y install sudo apt-utils gcc g++ gdb cmake make build-essential
 RUN apt-get install -y qt5-default qt4-dev-tools qtcreator
+
+RUN export uid=1000 gid=1000 && \
+    mkdir -p ${HOME_DIR} && \
+    echo "${USER_NAME}:x:${uid}:${gid}:${USER_NAME},,,:${HOME_DIR}:/bin/bash" >> /etc/passwd && \
+    echo "${USER_NAME}:x:${uid}:" >> /etc/group && \
+    echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER_NAME} && \
+    chmod 0440 /etc/sudoers.d/${USER_NAME} && \
+    chown ${uid}:${gid} -R ${HOME_DIR}
+
 #WORKDIR /xyz/myworkingdir/
 #CMD ["enter your build command"] --> this producess the binary called myapp
 
 FROM alpine:latest as prod
 RUN apt-get update && apt-get -y install qt5-default
+
+ENV USER_NAME touchpanel
+ENV HOME_DIR /home/${USER_NAME}
+RUN export uid=1000 gid=1000 && \
+    mkdir -p ${HOME_DIR} && \
+    echo "${USER_NAME}:x:${uid}:${gid}:${USER_NAME},,,:${HOME_DIR}:/bin/bash" >> /etc/passwd && \
+    echo "${USER_NAME}:x:${uid}:" >> /etc/group && \
+    echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER_NAME} && \
+    chmod 0440 /etc/sudoers.d/${USER_NAME} && \
+    chown ${uid}:${gid} -R ${HOME_DIR}
+
 #WORKDIR /root/
 #COPY --from=build-env /xyz/myworkingdir/myapp .
 #CMD ["./myapp"]
