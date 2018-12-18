@@ -5,5 +5,5 @@ ENV USER_NAME touchpanel
 ENV USER_GROUP hipase-restricted
 ENV HOME_DIR /home/${USER_NAME}
 
-RUN addgroup -S ${USER_NAME}
+RUN addgroup -S ${USER_GROUP}
 RUN adduser -S ${USER_NAME} -G ${USER_GROUP}
