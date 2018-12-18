@@ -1,15 +1,16 @@
 FROM alpine:latest as prod
 RUN apk update && apk add qt5-qtbase
+RUN apk --no-cache add shadow
 
 ENV USER_NAME touchpanel
-ENV USER_GROUP hipase-restricted
+ENV USER_GROUP restricted
 ENV HOME_DIR /home/${USER_NAME}
 
 ENV ROOT_PWD hipahipa
 
-RUN addgroup -g 1000 ${USER_GROUP}
-RUN adduser -u 1000 -D -S -G ${USER_NAME} ${USER_GROUP}
-RUN apk --no-cache add shadow && usermod -aG ${USER_GROUP} nginx
+RUN set -x \
+  && addgroup -g 1000 ${USER_GROUP} \
+  && adduser -u 1000 -D -S -G ${USER_GROUP} ${USER_NAME}
 RUN echo "root:${ROOT_PWD}" | chpasswd
 RUN mkdir -p ${HOME_DIR}
 
