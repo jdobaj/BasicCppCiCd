@@ -1,13 +1,9 @@
-FROM alpine:latest
+FROM alpine:latest as prod
 RUN apk update && apk add qt5-qtbase
 
 ENV USER_NAME touchpanel
+ENV USER_GROUP hipase-restricted
 ENV HOME_DIR /home/${USER_NAME}
-RUN export uid=1000 gid=1000 && \
-    mkdir -p ${HOME_DIR} && \
-    echo "${USER_NAME}:x:${uid}:${gid}:${USER_NAME},,,:${HOME_DIR}:/bin/bash" >> /etc/passwd && \
-    echo "${USER_NAME}:x:${uid}:" >> /etc/group && \
-    echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER_NAME} && \
-    chmod 0440 /etc/sudoers.d/${USER_NAME} && \
-    chown ${uid}:${gid} -R ${HOME_DIR}
-    
+
+RUN addgroup -S ${USER_NAME}
+RUN adduser -S ${USER_NAME} -G ${USER_GROUP}
