@@ -12,4 +12,6 @@ ENV ROOT_PWD hipahipa
 RUN adduser -D ${USER_NAME}
 RUN echo "root:${ROOT_PWD}" | chpasswd
 RUN mkdir -p ${HOME_DIR}
+
+USER ${USER_NAME}
 WORKDIR ${HOME_DIR}
