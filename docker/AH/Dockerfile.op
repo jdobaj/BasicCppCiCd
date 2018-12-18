@@ -7,3 +7,5 @@ ENV HOME_DIR /home/${USER_NAME}
 
 RUN addgroup -S ${USER_GROUP}
 RUN adduser -S ${USER_NAME} -G ${USER_GROUP}
+RUN mkdir -r ${HOME_DIR}
+WORKDIR ${HOME_DIR}
