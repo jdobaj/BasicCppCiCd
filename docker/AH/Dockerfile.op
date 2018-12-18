@@ -7,7 +7,7 @@ ENV HOME_DIR /home/${USER_NAME}
 
 ENV ROOT_PWD hipahipa
 
-RUN addgroup -G 1000 ${USER_GROUP}
+RUN addgroup -g 1000 ${USER_GROUP}
 RUN adduser -u 1000 -D -S -G ${USER_NAME} ${USER_GROUP}
 RUN apk --no-cache add shadow && usermod -aG ${USER_GROUP} nginx
 RUN echo "root:${ROOT_PWD}" | chpasswd
