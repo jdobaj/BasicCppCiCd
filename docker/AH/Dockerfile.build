@@ -1,0 +1,11 @@
+FROM debian:latest as build-env
+RUN apt-get update && apt-get -y install sudo apt-utils gcc g++ gdb cmake make build-essential
+RUN apt-get install -y qt5-default qt4-dev-tools qtcreator
+#WORKDIR /xyz/myworkingdir/
+#CMD ["enter your build command"] --> this producess the binary called myapp
+
+FROM alpine:latest as prod
+RUN apt-get update && apt-get -y install qt5-default
+#WORKDIR /root/
+#COPY --from=build-env /xyz/myworkingdir/myapp .
+#CMD ["./myapp"]
