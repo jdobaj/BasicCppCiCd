@@ -1,4 +1,4 @@
-FROM debian:latest as build-env
+FROM ubuntu:18.04 as build-env
 
 ENV BUILD_USER_NAME developer
 ENV BUILD_HOME_DIR /home/${BUILD_USER_NAME}
@@ -6,20 +6,10 @@ ENV BUILD_HOME_DIR /home/${BUILD_USER_NAME}
 RUN apt-get update && apt-get -y install sudo apt-utils
 RUN apt-get install -y gcc g++ gdb cmake make build-essential qt5-default qt4-dev-tools qtbase5-examples qtcreator
 
-RUN export uid=1000 gid=1000 && \
-    mkdir -p ${BUILD_HOME_DIR} && \
-    echo "${BUILD_USER_NAME}:x:${uid}:${gid}:${BUILD_USER_NAME},,,:${BUILD_HOME_DIR}:/bin/bash" >> /etc/passwd && \
-    echo "${BUILD_USER_NAME}:x:${uid}:" >> /etc/group && \
-    echo "${BUILD_USER_NAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${BUILD_USER_NAME} && \
-    chmod 0440 /etc/sudoers.d/${BUILD_USER_NAME} && \
-    chown ${uid}:${gid} -R ${BUILD_HOME_DIR}
-
+RUN mkdir -p ${BUILD_HOME_DIR}/build
 WORKDIR ${BUILD_HOME_DIR}/build
 COPY QtExampleApp/elasticnodes ${BUILD_HOME_DIR}/build
-RUN chmod -R a+rw ${BUILD_HOME_DIR}/build
-
-USER ${BUILD_USER_NAME}
-CMD ["qmake -makefile && make && ls -l"]
+RUN ls -l && qmake -makefile && make && ls -l
 
 FROM alpine:latest as ops-env
 RUN apk update && apk add qt5-qtbase qt5-qtbase-x11 libc6-compat shadow
@@ -27,6 +17,7 @@ RUN apk update && apk add qt5-qtbase qt5-qtbase-x11 libc6-compat shadow
 ENV USER_NAME touchpanel
 ENV USER_GROUP touchpanel
 ENV HOME_DIR /home/${USER_NAME}
+ENV BINARY_SRC_DIR /home/developer/build
 
 ENV ROOT_PWD hipahipa
 
@@ -34,9 +25,9 @@ RUN set -x \
   && addgroup -g 1000 ${USER_GROUP} \
   && adduser -u 1000 -D -S -G ${USER_GROUP} ${USER_NAME}
 RUN echo "root:${ROOT_PWD}" | chpasswd
-RUN mkdir -p ${HOME_DIR}
 
+RUN mkdir -p ${HOME_DIR}
 USER ${USER_NAME}
 WORKDIR ${HOME_DIR}
-COPY --from=build-env ${BUILD_HOME_DIR}/build/elasticnodes .
+COPY --from=build-env ${BINARY_SRC_DIR}/elasticnodes .
 CMD ["./elasticnodes"]
