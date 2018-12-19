@@ -12,7 +12,7 @@ RUN export uid=1000 gid=1000 && \
     chmod 0440 /etc/sudoers.d/${BUILD_USER_NAME} && \
     chown ${uid}:${gid} -R ${BUILD_HOME_DIR}
 
-RUN apt-get install -y qt5-default qt4-dev-tools qtcreator
+RUN apt-get install -y qt5-default qt4-dev-tools qtbase5-examples qtcreator
 
 USER ${BUILD_USER_NAME}
 WORKDIR ${BUILD_HOME_DIR}
