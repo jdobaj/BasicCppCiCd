@@ -2,6 +2,7 @@ FROM debian:latest as build-env
 
 ENV BUILD_USER_NAME developer
 ENV BUILD_HOME_DIR /home/${USER_NAME}
+
 RUN apt-get update && apt-get -y install sudo apt-utils gcc g++ gdb cmake make build-essential
 
 RUN export uid=1000 gid=1000 && \
@@ -16,25 +17,4 @@ RUN apt-get install -y qt5-default qt4-dev-tools qtbase5-examples qtcreator
 
 USER ${BUILD_USER_NAME}
 WORKDIR ${BUILD_HOME_DIR}
-#CMD ["enter your build command"] --> this produces the binary called myapp
-
-
-FROM alpine:latest as ops-env
-RUN apk update && apk add qt5-qtbase qt5-qtbase-x11 libc6-compat shadow
-
-ENV USER_NAME touchpanel
-ENV USER_GROUP touchpanel
-ENV HOME_DIR /home/${USER_NAME}
-
-ENV ROOT_PWD hipahipa
-
-RUN set -x \
-  && addgroup -g 1000 ${USER_GROUP} \
-  && adduser -u 1000 -D -S -G ${USER_GROUP} ${USER_NAME}
-RUN echo "root:${ROOT_PWD}" | chpasswd
-RUN mkdir -p ${HOME_DIR}
-
-USER ${USER_NAME}
-WORKDIR ${HOME_DIR}
-#COPY --from=build-env ${BUILD_HOME_DIR}/myapp .
-#CMD ["./myapp"]
+#CMD ["qmake elasticnodes.pro && make mocables all"]
