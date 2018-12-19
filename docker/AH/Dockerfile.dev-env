@@ -1,9 +1,10 @@
 FROM debian:latest as build-env
 
 ENV BUILD_USER_NAME developer
-ENV BUILD_HOME_DIR /home/${USER_NAME}
+ENV BUILD_HOME_DIR /home/${BUILD_USER_NAME}
 
-RUN apt-get update && apt-get -y install sudo apt-utils gcc g++ gdb cmake make build-essential
+RUN apt-get update && apt-get -y install sudo apt-utils
+RUN apt-get install -y gcc g++ gdb cmake make build-essential qt5-default qt4-dev-tools qtbase5-examples qtcreator
 
 RUN export uid=1000 gid=1000 && \
     mkdir -p ${BUILD_HOME_DIR} && \
@@ -12,8 +13,6 @@ RUN export uid=1000 gid=1000 && \
     echo "${BUILD_USER_NAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${BUILD_USER_NAME} && \
     chmod 0440 /etc/sudoers.d/${BUILD_USER_NAME} && \
     chown ${uid}:${gid} -R ${BUILD_HOME_DIR}
-
-RUN apt-get install -y qt5-default qt4-dev-tools qtbase5-examples qtcreator
 
 USER ${BUILD_USER_NAME}
 WORKDIR ${BUILD_HOME_DIR}
