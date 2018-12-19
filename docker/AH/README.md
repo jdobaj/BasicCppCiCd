@@ -14,7 +14,7 @@ sudo nano /etc/docker/daemon.json
 }
 ```
 
-3. Manage docker as non-root user
+3. Manage docker as non-root user. Attention, this is a security risk and should only be done during development.
 
 ```shell
 sudo groupadd docker
@@ -42,45 +42,28 @@ sudo apt-get install -y ctop
 ctop
 ```
 
-## Create the build image
+## Building and running images
 
-The **Dockerfile** could use [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/). The **target** specifies the stage where the build stops. In the given example, no build output is generated, which makes multi-stage builds obsolete in this case.
+The **docker-*.sh** scripts can be used to create container images and to run those images. The following images can be created:
 
+1. The **docker-multistage-build.sh** script performs a multi-stage build to create the final Alpine Linux operations image that runs the **elasticnodes-example**.
+    * This image can be startet be executing the **docker-multistage-run.sh** script.
 ```shell
-docker build --target build-env --file Dockerfile.build --tag jdobaj/qt-build-env:v1.0 .
+./docker-multistage-build.sh
+./docker-multistage-run.sh
 ```
 
-## Run the build environment
-
-* On Linux run:
-  * The -v option allows to share folders between the container and the host machine.
-  * The build sources and the build output can both be shared using the specified shared folder.
-
+2. The **docker-dev-env-build.sh** script creates an Ubuntu development environment with qt5 and qtcreator pre-installed.
+    * This image can be startet be executing the **docker-dev-env-run.sh** script.
+    * In the container **qtcreator** can be started for app-development.
 ```shell
-xhost +
-docker run -it --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/`id -nu`:/home/`id -nu` -e DISPLAY=unix$DISPLAY --name qt-build-env jdobaj/qt-build-env:v1.0
+./docker-dev-env-build.sh
+./docker-dev-env-run.sh
 ```
 
-* On Windows:
-  1. Start a XServer on your host, like [VcXsrv](https://sourceforge.net/projects/vcxsrv/)
-  2. Run the following commands:
-
+3. The **docker-ops-env-build.sh** script creates an Alpine Linux operations environment with the qt5 libraries pre-installed.
+    * This image can be startet be executing the **docker-ops-env-run.sh** script.
 ```shell
-set YOUR_IP_ADDRESS="10.x.x.x"
-docker  run -it --privileged -e DISPLAY=%YOUR_IP_ADDRESS%:0.0 --name qt-build-env jdobaj/qt-build-env:v1.0
-```
-
-## Build and run the operation container
-
-1. If you can not use multi-stage builds, then it is necessary to first create your operation container image:
-
-```shell
-docker build --file Dockerfile.op --tag jdobaj/qt-op:v1.0 .
-```
-
-2. Running the operation container and sharing folders with the host system is done like in the previous steps. 
-
-```shell
-xhost +
-docker run -it --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/`id -nu`:/home/`id -nu` -e DISPLAY=unix$DISPLAY --name qt-op jdobaj/qt-op:v1.0
+./docker-ops-env-build.sh
+./docker-ops-env-run.sh
 ```
