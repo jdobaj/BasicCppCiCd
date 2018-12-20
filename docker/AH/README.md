@@ -32,7 +32,7 @@ sudo cgclassify -g cpu:hipasetouchpanel "$(pgrep Xorg)"
 5. Limit CPU resource usage of the cgroup to e.g. 10 percent. Again, see the [persistent cgroup configuration](https://wiki.archlinux.org/index.php/cgroups#Persistent_group_configuration) in order to set persistent limits (e.g. CPU, memory, I/O, network). 
 
 ```shell
-sudo echo 10000 > /sys/fs/cgroup/cpu,cpuacct/hipasetouchpanel/cgroup
+sudo echo 10000 > /sys/fs/cgroup/cpu,cpuacct/hipasetouchpanel/cpu.cfs_quota_us
 ```
 
 6. Install **ctop** on your host in order to inspect the cgroups on your host. Run **ctop** and press **F5** to switch from the *list view mode* to the *tree view mode*.
